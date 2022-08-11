@@ -732,11 +732,11 @@ namespace IMGUIZMO_NAMESPACE
    static Context gContext;
 
    static const vec_t directionUnary[3] = { makeVect(1.f, 0.f, 0.f), makeVect(0.f, 1.f, 0.f), makeVect(0.f, 0.f, 1.f) };
-   static const ImU32 directionColor[3] = { IM_COL32(0xAA, 0, 0, 0xFF), IM_COL32(0, 0xAA, 0, 0xFF), IM_COL32(0, 0, 0xAA, 0XFF) };
+   static const ImU32 directionColor[3] = { IM_COL32(0xD8, 0x5E, 0x71, 0xFF), IM_COL32(0x25, 0xAA, 0x25, 0xFF), IM_COL32(0x2C, 0x53, 0xCC, 0XFF) };
 
    // Alpha: 100%: FF, 87%: DE, 70%: B3, 54%: 8A, 50%: 80, 38%: 61, 12%: 1F
-   static const ImU32 planeColor[3] = { IM_COL32(0xAA, 0, 0, 0x61), IM_COL32(0, 0xAA, 0, 0x61), IM_COL32(0, 0, 0xAA, 0x61) };
-   static const ImU32 selectionColor = IM_COL32(0xFF, 0x80, 0x10, 0x8A);
+   static const ImU32 planeColor[3] = { IM_COL32(0xD8, 0x68, 0x7A, 0x61), IM_COL32(0x55, 0xAB, 55, 0xFF), IM_COL32(0x42, 0x67, 0xD9, 0xFF) };
+   static const ImU32 selectionColor = IM_COL32(0xCC, 0xAA, 0x20, 0xFF);
    static const ImU32 inactiveColor = IM_COL32(0x99, 0x99, 0x99, 0x99);
    static const ImU32 translationLineColor = IM_COL32(0xAA, 0xAA, 0xAA, 0xAA);
    static const char* translationInfoMask[] = { "X : %5.3f", "Y : %5.3f", "Z : %5.3f",
@@ -1178,7 +1178,7 @@ namespace IMGUIZMO_NAMESPACE
       vec_t perpendicularVector;
       perpendicularVector.Cross(gContext.mRotationVectorSource, gContext.mTranslationPlan);
       perpendicularVector.Normalize();
-      float acosAngle = Clamp(Dot(localPos, gContext.mRotationVectorSource), -1.f, 1.f);
+      float acosAngle = Clamp(Dot(localPos, gContext.mRotationVectorSource), -0.9999f, 0.9999f);
       float angle = acosf(acosAngle);
       angle *= (Dot(localPos, perpendicularVector) < 0.f) ? 1.f : -1.f;
       return angle;
@@ -1340,10 +1340,10 @@ namespace IMGUIZMO_NAMESPACE
                }
                drawList->AddCircleFilled(worldDirSSpace, 6.f, colors[i + 1]);
 
-               if (gContext.mAxisFactor[i] < 0.f)
-               {
-                  DrawHatchedAxis(dirAxis * scaleDisplay[i]);
-               }
+               //if (gContext.mAxisFactor[i] < 0.f)
+               //{
+               //   DrawHatchedAxis(dirAxis * scaleDisplay[i]);
+               //}
             }
          }
       }
@@ -1505,10 +1505,10 @@ namespace IMGUIZMO_NAMESPACE
                drawList->AddTriangleFilled(worldDirSSpace - dir, a + ortogonalDir, a - ortogonalDir, colors[i + 1]);
                // Arrow head end
 
-               if (gContext.mAxisFactor[i] < 0.f)
-               {
-                  DrawHatchedAxis(dirAxis);
-               }
+               //if (gContext.mAxisFactor[i] < 0.f)
+               //{
+               //   DrawHatchedAxis(dirAxis);
+               //}
             }
          }
          // draw plane
